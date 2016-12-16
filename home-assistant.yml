@@ -1,0 +1,36 @@
+---
+
+- hosts: homeassistant
+  gather_facts: False
+  pre_tasks:
+    - name: test for python and install if necessary
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+    - name: run gather_facts
+      setup: # aka gather_facts
+  become: yes
+
+  vars:
+    - homeassistant_git_config: "https://github.com/rmalleman/home-assistant-config"
+    - homeassistant_environment_file: "/home/{{ homeassistant_user }}/ha.env"
+  roles:
+    - role: jdauphant.ssl-certs
+    - role: ansible-homeassistant
+    - role: jdauphant.nginx
+      nginx_configs:
+        ssl:
+          - ssl_certificate_key {{ ssl_certs_privkey_path  }}
+          - ssl_certificate {{ ssl_certs_cert_path }} 
+      nginx_sites:
+        default:
+          - listen 443 ssl
+          - server_name homeassistant
+          - location / { proxy_pass http://127.0.0.1:8123; }
+      become: yes
+  tasks:
+    - name: copy env file
+      copy:
+        src: files/ha.env
+        dest: /home/{{ homeassistant_user }}/ha.env
+      become: true
+      become_user: "{{ homeassistant_user }}"

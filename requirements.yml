@@ -1,0 +1,5 @@
+- src: https://github.com/rmalleman/ansible-homeassistant
+
+- src: jdauphant.nginx
+- src: jdauphant.ssl-certs
+- src: thefinn93.letsencrypt
