@@ -2,7 +2,7 @@ servers=[
   {
     :hostname => "test-media",
     :ip => "192.168.50.2",
-    :box => "v0rtex/xenial64",
+    :box => "geerlingguy/ubuntu1604",
     :ram => 512,
     :cpu => 1
   }
