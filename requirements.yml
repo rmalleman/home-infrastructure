@@ -3,3 +3,4 @@
 - src: jdauphant.nginx
 - src: jdauphant.ssl-certs
 - src: thefinn93.letsencrypt
+- src: cmacrae.sonarr

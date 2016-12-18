@@ -1,2 +1,8 @@
 [homeassistant]
 192.168.50.2 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[sonarr]
+192.168.50.2 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[proxy]
+192.168.50.2 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
